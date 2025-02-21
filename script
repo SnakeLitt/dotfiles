@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Script to install and configure Vim from dotfiles
+
+# --- Configuration ---
+REPOSITORY_DIR="$HOME/dotfiles"  # Replace with your actual dotfiles repository path
+VIMRC_PATH="$REPOSITORY_DIR/.vimrc"
+HOME_DIR="$HOME"
+VIM_BUNDLE_DIR="$HOME_DIR/.vim/bundle"
+VUNDLE_PATH="$VIM_BUNDLE_DIR/Vundle.vim"
+
+# --- Functions ---
+
+# Function to copy a file and report success/failure
+copy_file() {
+  local source_file="$1"
+  local destination_file="$2"
+
+  echo "Copying $source_file to $destination_file..."
+  cp -f "$source_file" "$destination_file"
+  if [ $? -eq 0 ]; then
+    echo "Successfully copied $source_file to $destination_file."
+  else
+    echo "ERROR: Failed to copy $source_file to $destination_file."
+    return 1 # Indicate failure
+  fi
+}
+
+# Function to install Vundle
+install_vundle() {
+  echo "Installing Vundle..."
+  mkdir -p "$VIM_BUNDLE_DIR"
+
+  git clone https://github.com/VundleVim/Vundle.vim.git "$VIM_BUNDLE_DIR/Vundle.vim"
+  if [ $? -eq 0 ]; then
+    echo "Vundle installed successfully."
+  else
+    echo "ERROR: Failed to install Vundle."
+    return 1 # Indicate failure
+  fi
+}
+
+
+# Function to install Vim plugins using Vundle
+install_vim_plugins() {
+  echo "Installing Vim plugins..."
+  vim +PluginInstall +qall
+  if [ $? -eq 0 ]; then
+    echo "Vim plugins installed successfully."
+  else
+    echo "ERROR: Failed to install Vim plugins."
+    return 1 # Indicate failure
+  fi
+}
+
+
+# --- Main Script ---
+
+# 1. Copy .vimrc
+copy_file "$VIMRC_PATH" "$HOME_DIR/.vimrc" || exit 1
+
+# 2. Install Vundle if it doesn't exist
+if [ ! -f "$VUNDLE_PATH" ]; then
+  install_vundle || exit 1
+fi
+
+# 3. Install Vim plugins using Vundle
+install_vim_plugins || exit 1
+
+echo "Vim configuration complete!"
+
+exit 0
