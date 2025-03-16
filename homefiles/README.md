@@ -10,3 +10,5 @@
 - To run the script `sudo ./alias-bash.sh` then it will replace the old file with a new and create a backup of the file too.  If it does not work, it will show up with an error. 
 
 - verified the script by doing `source alias-bash.sh` to make sure everything can run correctly
+
+![alt text](image.png)
