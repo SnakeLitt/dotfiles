@@ -16,7 +16,7 @@ if [ -f "$HOME/.bashrc" ]; then
 fi
 
 # 2. Construct the GitHub raw URL
-github_raw_url="https://raw.githubusercontent.com/$github_username/$github_repo/main/$bashrc_filepath" # Assuming main branch
+github_raw_url="https://github.com/SnakeLitt/dotfiles/blob/main/homefiles/alias-bash.sh" # Assuming main branch
 
 #Check if the branch is "main", if not replace with "master"
 if ! curl -s -o /dev/null -w "%{http_code}" "$github_raw_url" | grep -q "200"; then
