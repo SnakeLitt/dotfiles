@@ -3,7 +3,11 @@
 # Script to install and configure Vim from dotfiles
 
 # --- Configuration ---
+<<<<<<< HEAD
 REPOSITORY_DIR="$HOME/dotfiles"  # Replace with your actual dotfiles repository path
+=======
+REPOSITORY_DIR="$HOME/git/dotfiles"  # Replace with your actual dotfiles repository path
+>>>>>>> cf0a86ba5896959e0d0ee9bcdb5aec5b781e438d
 VIMRC_PATH="$REPOSITORY_DIR/.vimrc"
 HOME_DIR="$HOME"
 VIM_BUNDLE_DIR="$HOME_DIR/.vim/bundle"
@@ -13,6 +17,7 @@ VUNDLE_PATH="$VIM_BUNDLE_DIR/Vundle.vim"
 
 # Function to copy a file and report success/failure
 copy_file() {
+<<<<<<< HEAD
   local source_file="$1"
   local destination_file="$2"
 
@@ -22,6 +27,17 @@ copy_file() {
     echo "Successfully copied $source_file to $destination_file."
   else
     echo "ERROR: Failed to copy $source_file to $destination_file."
+=======
+  local ~/git/dotfiles/.vimrc="$1"
+  local ~/.vimrc="$2"
+
+  echo "Copying $~/git/dotfiles/.vimrc to $~/.vimrc..."
+  cp -f "$~/git/dotfiles/.vimrc" "$~/.vimrc"
+  if [ $? -eq 0 ]; then
+    echo "Successfully copied $~/git/dotfiles/.vimrc to $~/.vimrc."
+  else
+    echo "ERROR: Failed to copy $~/git/dotfiles/.vimrc to $~/.vimrc."
+>>>>>>> cf0a86ba5896959e0d0ee9bcdb5aec5b781e438d
     return 1 # Indicate failure
   fi
 }
@@ -69,4 +85,8 @@ install_vim_plugins || exit 1
 
 echo "Vim configuration complete!"
 
+<<<<<<< HEAD
 exit 0
+=======
+exit 0
+>>>>>>> cf0a86ba5896959e0d0ee9bcdb5aec5b781e438d
